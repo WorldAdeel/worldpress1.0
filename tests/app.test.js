@@ -257,7 +257,16 @@ const settle = d => d.page.waitForFunction(() => S.dirty.length === 0 && !syncin
     console.log('12. Speed & look');
     const ms = await A.page.evaluate(() => { const t = performance.now(); for (let i = 0; i < 20; i++) render(); return (performance.now() - t) / 20; });
     ok(ms < 60, 'screen renders in ' + ms.toFixed(1) + ' ms');
+    await A.page.click('.tabs [data-v=leads]'); await A.page.waitForTimeout(200);
+    ok(await A.page.$eval('#sortB', e => e.textContent.includes('Country')) && await A.page.$$eval('.sec.cty', x => x.length) > 5, 'Leads tab sorted by country with country headers');
+    const perScreen = await A.page.$$eval('.card', cs => cs.filter(c => { const r = c.getBoundingClientRect(); return r.top >= 0 && r.bottom <= innerHeight; }).length);
+    ok(perScreen >= 11, perScreen + ' leads fully visible on a phone screen');
     await A.page.screenshot({ path: path.join(__dirname, 'screenshot-list.png') });
+    await A.page.setViewportSize({ width: 1280, height: 800 });
+    const pc = await A.page.$$eval('.card', cs => cs.filter(c => { const r = c.getBoundingClientRect(); return r.top >= 0 && r.bottom <= innerHeight; }).length);
+    ok(pc >= 16, pc + ' leads visible on a PC screen (2 columns)');
+    await A.page.screenshot({ path: path.join(__dirname, 'screenshot-pc.png') });
+    await A.page.setViewportSize({ width: 400, height: 800 });
     await A.page.click('.card .mid'); await A.page.waitForTimeout(400);
     await A.page.screenshot({ path: path.join(__dirname, 'screenshot-lead.png') });
     await ev(A, () => { while (sheets.length) closeSheet(); });

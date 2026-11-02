@@ -181,6 +181,26 @@ rep("function wireWelcome(){$('#wI').onclick=()=>$('#fImport').click();$('#wA').
 rep("else if(e.key==='2')go('leads');else if(e.key==='3')go('photos');});", "else if(e.key==='2')go('leads');});")
 rep("ensureImgs();\n", "")
 
+
+# ---------- layout: denser cards, Country sort, 2 columns on PC ----------
+rep(".mini{font-size:12px;color:var(--mut)}\n",
+    ".mini{font-size:12px;color:var(--mut)}\n"
+    ".card{margin:2px 0;border-radius:9px}.card .in{gap:8px;padding:3px 4px 3px 9px;min-height:40px}.bar .chips{padding-top:6px}.bar{padding-bottom:2px}\n"
+    ".nm{font-size:14.5px}.sub{margin-top:1px;font-size:12px}.wa{width:38px;height:32px;border-radius:9px}.wa svg{width:20px;height:20px}\n"
+    ".tm{font-size:12px}.sec{margin:10px 4px 2px}.sec.cty{margin:8px 4px 1px;text-transform:none;letter-spacing:0;font-size:12.5px;color:var(--ink);gap:6px}\n"
+    "@media(min-width:900px){#app{max-width:1180px}.bar{margin:0;padding:6px 0 4px}#main{display:grid;grid-template-columns:1fr 1fr;column-gap:8px;align-items:start}@media(min-width:1400px){#main{grid-template-columns:1fr 1fr 1fr}#app{max-width:1600px}}"
+    "#main>.sec,#main>.empty,#main>.more,#main>.nudge,#main>.hint,#main>.welcome{grid-column:1/-1}.welcome{max-width:600px;justify-self:center;width:100%}}\n", 1)
+rep("const SORTS={next:'Next step',az:'A–Z',time:'Their time'};", "const SORTS={next:'Next step',country:'Country',time:'Their time',az:'A–Z'};")
+rep("const UI=Object.assign({stage:'',mat:'',sort:'next'},load(K.ui,{}));", "const UI=Object.assign({stage:'',mat:'',sort:'country'},load(K.ui,{}));if(!['next','country','time','az'].includes(UI.sort)||!load('pmi3-v32ui',0)){UI.sort='country';store('pmi3-v32ui',1);}")
+rep("  if(UI.sort==='az')r.sort((a,b)=>title(a).localeCompare(title(b)));",
+    "  const mins=l=>(clockOf(l)||{mins:9999}).mins;\n  if(UI.sort==='country')r.sort((a,b)=>(!a.country-!b.country)||(a.country||'').localeCompare(b.country||'')||mins(a)-mins(b)||title(a).localeCompare(title(b)));\n  else if(UI.sort==='az')r.sort((a,b)=>title(a).localeCompare(title(b)));")
+rep("(r.length?r.slice(0,limit).map(card).join(''):'<div class=\"empty\">No leads here.</div>')",
+    "(r.length?listHtml(r.slice(0,limit)):'<div class=\"empty\">No leads here.</div>')")
+rep("let limit=80;",
+    "let limit=150;\n/* in Country sort, a slim header per country */\nfunction listHtml(arr){if(UI.sort!=='country')return arr.map(card).join('');const n={};arr.forEach(l=>{const c=l.country||'';n[c]=(n[c]||0)+1;});let h='',last=null;arr.forEach(l=>{const c=l.country||'';if(c!==last){last=c;h+='<div class=\"sec cty\">'+(c?flag(c)+' '+esc(c):'No country')+' <span class=\"n\" style=\"color:var(--mut)\">'+n[c]+'</span></div>';}h+=card(l);});return h;}")
+rep("function renderLeadList(more){if(!more)limit=80;", "function renderLeadList(more){if(!more)limit=150;")
+rep("if(mb)mb.onclick=()=>{limit+=80;renderLeadList(true);};", "if(mb)mb.onclick=()=>{limit+=150;renderLeadList(true);};")
+
 SYNC = open(__file__.replace('build_v32.py', 'sync_v32.js'), encoding='utf8').read()
 rep("fillCountries();render();\n", SYNC + "\nfillCountries();render();\nif(document.documentElement.classList.contains('lk'))setTimeout(()=>$('#lockP').focus(),60);\nif(S.on)schedule(300);\n")
 

@@ -168,6 +168,10 @@ details.ed summary::-webkit-details-marker{display:none}
 .welcome ol{text-align:left;font-size:13.5px;color:var(--mut);padding-left:20px;margin:10px 0 16px}
 .welcome .btn{width:100%;margin-top:8px}
 .mini{font-size:12px;color:var(--mut)}
+.card{margin:2px 0;border-radius:9px}.card .in{gap:8px;padding:3px 4px 3px 9px;min-height:40px}.bar .chips{padding-top:6px}.bar{padding-bottom:2px}
+.nm{font-size:14.5px}.sub{margin-top:1px;font-size:12px}.wa{width:38px;height:32px;border-radius:9px}.wa svg{width:20px;height:20px}
+.tm{font-size:12px}.sec{margin:10px 4px 2px}.sec.cty{margin:8px 4px 1px;text-transform:none;letter-spacing:0;font-size:12.5px;color:var(--ink);gap:6px}
+@media(min-width:900px){#app{max-width:1180px}.bar{margin:0;padding:6px 0 4px}#main{display:grid;grid-template-columns:1fr 1fr;column-gap:8px;align-items:start}@media(min-width:1400px){#main{grid-template-columns:1fr 1fr 1fr}#app{max-width:1600px}}#main>.sec,#main>.empty,#main>.more,#main>.nudge,#main>.hint,#main>.welcome{grid-column:1/-1}.welcome{max-width:600px;justify-self:center;width:100%}}
 .lk #app,.lk .fab{display:none}#lock{display:none}.lk #lock{display:flex}
 #lock{position:fixed;inset:0;z-index:400;background:var(--bg);align-items:center;justify-content:center;padding:20px}
 #lock .in{width:100%;max-width:320px;text-align:center}#lock input{margin:12px 0;text-align:center;font-size:17px}
@@ -365,7 +369,7 @@ function refresh(){render();sheets.forEach(s=>s.redraw&&s.redraw());}
 
 /* ---------- main views ---------- */
 let view='today';
-const UI=Object.assign({stage:'',mat:'',sort:'next'},load(K.ui,{}));let Q='';
+const UI=Object.assign({stage:'',mat:'',sort:'country'},load(K.ui,{}));if(!['next','country','time','az'].includes(UI.sort)||!load('pmi3-v32ui',0)){UI.sort='country';store('pmi3-v32ui',1);}let Q='';
 const saveUI=()=>store(K.ui,{stage:UI.stage,mat:UI.mat,sort:UI.sort});
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>go(b.dataset.v));
 function go(v){view=v;Q='';$('#q').value='';$('#srch').classList.remove('has');window.scrollTo(0,0);render();}
@@ -403,18 +407,22 @@ function renderLeads(){const A=active();
   const st=[['','All',A.length]].concat(STAGES.map(s=>[s[0],s[1]+(s[0]==='customer'?'s':''),A.filter(l=>l.stage===s[0]).length]),[['arch','Archived',leads.length-A.length]]);
   const cnt={};A.forEach(l=>l.interests.forEach(c=>cnt[c]=(cnt[c]||0)+1));
   const mats=allMats().filter(m=>cnt[m.code]||UI.mat===m.code).sort((a,b)=>(cnt[b.code]||0)-(cnt[a.code]||0));
-  const SORTS={next:'Next step',az:'A–Z',time:'Their time'};
+  const SORTS={next:'Next step',country:'Country',time:'Their time',az:'A–Z'};
   $('#chips').innerHTML='<button class="chip" id="sortB">↕ '+SORTS[UI.sort]+'</button>'+st.filter(s=>s[2]||!s[0]||UI.stage===s[0]).map(s=>'<button class="chip'+(UI.stage===s[0]?' on':'')+'" data-st="'+s[0]+'">'+s[1]+'<i>'+s[2]+'</i></button>').join('')+(mats.length?'<span class="sep"></span>'+mats.map(m=>'<button class="chip m'+(UI.mat===m.code?' on':'')+'" data-mt="'+m.code+'" title="'+esc(m.n)+'">'+m.code+'<i>'+(cnt[m.code]||0)+'</i></button>').join(''):'');
   $('#sortB').onclick=()=>{const k=Object.keys(SORTS);UI.sort=k[(k.indexOf(UI.sort)+1)%k.length];saveUI();renderLeads();};
   document.querySelectorAll('[data-st]').forEach(b=>b.onclick=()=>{UI.stage=b.dataset.st;saveUI();renderLeads();});
   document.querySelectorAll('[data-mt]').forEach(b=>b.onclick=()=>{UI.mat=UI.mat===b.dataset.mt?'':b.dataset.mt;saveUI();renderLeads();});
   renderLeadList();}
-let limit=80;
-function renderLeadList(more){if(!more)limit=80;const m=$('#main');if(!leads.length){m.innerHTML=welcome();wireWelcome();return;}
+let limit=150;
+/* in Country sort, a slim header per country */
+function listHtml(arr){if(UI.sort!=='country')return arr.map(card).join('');const n={};arr.forEach(l=>{const c=l.country||'';n[c]=(n[c]||0)+1;});let h='',last=null;arr.forEach(l=>{const c=l.country||'';if(c!==last){last=c;h+='<div class="sec cty">'+(c?flag(c)+' '+esc(c):'No country')+' <span class="n" style="color:var(--mut)">'+n[c]+'</span></div>';}h+=card(l);});return h;}
+function renderLeadList(more){if(!more)limit=150;const m=$('#main');if(!leads.length){m.innerHTML=welcome();wireWelcome();return;}
   let r=leads.filter(l=>(UI.stage==='arch'?!!l.archived:(!l.archived&&(!UI.stage||l.stage===UI.stage)))&&(!UI.mat||l.interests.includes(UI.mat))&&matchQ(l,Q));
-  if(UI.sort==='az')r.sort((a,b)=>title(a).localeCompare(title(b)));else if(UI.sort==='time')r.sort((a,b)=>(WRANK[win(a)]-WRANK[win(b)])||((clockOf(a)||{mins:9999}).mins-(clockOf(b)||{mins:9999}).mins));else r.sort(sortNext);
-  m.innerHTML='<div class="sec">'+(UI.mat?'Want '+esc(matName(UI.mat)):'Leads')+' <span class="n">'+r.length+'</span></div>'+(r.length?r.slice(0,limit).map(card).join(''):'<div class="empty">No leads here.</div>')+(r.length>limit?'<button class="more" id="moreB">Show more ('+(r.length-limit)+')</button>':'');
-  const mb=$('#moreB');if(mb)mb.onclick=()=>{limit+=80;renderLeadList(true);};}
+  const mins=l=>(clockOf(l)||{mins:9999}).mins;
+  if(UI.sort==='country')r.sort((a,b)=>(!a.country-!b.country)||(a.country||'').localeCompare(b.country||'')||mins(a)-mins(b)||title(a).localeCompare(title(b)));
+  else if(UI.sort==='az')r.sort((a,b)=>title(a).localeCompare(title(b)));else if(UI.sort==='time')r.sort((a,b)=>(WRANK[win(a)]-WRANK[win(b)])||((clockOf(a)||{mins:9999}).mins-(clockOf(b)||{mins:9999}).mins));else r.sort(sortNext);
+  m.innerHTML='<div class="sec">'+(UI.mat?'Want '+esc(matName(UI.mat)):'Leads')+' <span class="n">'+r.length+'</span></div>'+(r.length?listHtml(r.slice(0,limit)):'<div class="empty">No leads here.</div>')+(r.length>limit?'<button class="more" id="moreB">Show more ('+(r.length-limit)+')</button>':'');
+  const mb=$('#moreB');if(mb)mb.onclick=()=>{limit+=150;renderLeadList(true);};}
 
 /* ---------- lead card ---------- */
 function card(l){const st=stateOf(l),w=win(l),c=clockOf(l),nd=l.next.date,s=since(l);
