@@ -1,0 +1,664 @@
+[
+ {
+  "id": "cd613e30-d8f1-6adf-91b7-584a2265b1f5",
+  "party": "Stone Gallery",
+  "contact": "Person 0",
+  "phone": "+61920096753",
+  "email": "",
+  "country": "Australia",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "by email only",
+  "cadence": "Biweekly",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [
+     "WL"
+    ],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "7ed4d57b-1e2f-eb89-414c-343c1027c4d1",
+  "party": "Jerry Australia",
+  "contact": "Person 1",
+  "phone": "+971917077201",
+  "email": "",
+  "country": "UAE",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "612e7696-a6ce-cc1b-78e5-10617311d8a3",
+  "party": "Empire Stone Co. Ltd",
+  "contact": "Person 2",
+  "phone": "+66946885253",
+  "email": "",
+  "country": "Thailand",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "Biweekly",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "0741c7a8-7ce4-2c82-1807-2e8c35bf992d",
+  "party": "Test Stone 3",
+  "contact": "Person 3",
+  "phone": "+880997395948",
+  "email": "",
+  "country": "Bangladesh",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "Biweekly",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "c324c985-9b81-0e76-6ec9-d28663ca828d",
+  "party": "Test Stone 4",
+  "contact": "Person 4",
+  "phone": "+1923729238",
+  "email": "",
+  "country": "USA",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "442e3d43-7204-e52d-b222-1a58008a05a6",
+  "party": "Test Stone 5",
+  "contact": "Person 5",
+  "phone": "+61874747711",
+  "email": "",
+  "country": "Australia",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "f1fd42a2-9755-d4c1-3a90-2931cd447e35",
+  "party": "Test Stone 6",
+  "contact": "Person 6",
+  "phone": "+971209765575",
+  "email": "",
+  "country": "UAE",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "Biweekly",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "05b6e6e3-07d4-bedc-5143-1193e6c3f339",
+  "party": "Test Stone 7",
+  "contact": "Person 7",
+  "phone": "+66127322286",
+  "email": "",
+  "country": "Thailand",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "f06c144a-025b-413f-8a9a-021ea648a7dd",
+  "party": "Test Stone 8",
+  "contact": "Person 8",
+  "phone": "+880509314931",
+  "email": "",
+  "country": "Bangladesh",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "6c0fd4f5-f813-0c42-3773-0edfafbd67f9",
+  "party": "Test Stone 9",
+  "contact": "Person 9",
+  "phone": "+1879378296",
+  "email": "",
+  "country": "USA",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "Biweekly",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "c381e88f-38c0-c8fd-8712-b8bc076f3787",
+  "party": "Test Stone 10",
+  "contact": "Person 10",
+  "phone": "+61570178216",
+  "email": "",
+  "country": "Australia",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "3bab6c39-8d88-348a-7eed-8d14f06d3fef",
+  "party": "Test Stone 11",
+  "contact": "Person 11",
+  "phone": "+971471192992",
+  "email": "",
+  "country": "UAE",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "c2cd789a-3802-08a9-ad45-f23d3b1a11df",
+  "party": "Test Stone 12",
+  "contact": "Person 12",
+  "phone": "+66593495461",
+  "email": "",
+  "country": "Thailand",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "Biweekly",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "05805975-ed2f-89d9-4a2f-20aaf3c64af7",
+  "party": "Test Stone 13",
+  "contact": "Person 13",
+  "phone": "+880546869806",
+  "email": "",
+  "country": "Bangladesh",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "ec148cb4-8e73-ca47-ea90-a8f0d66b829e",
+  "party": "Test Stone 14",
+  "contact": "Person 14",
+  "phone": "+1789658324",
+  "email": "",
+  "country": "USA",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "fe175330-a11d-459a-2f97-8d8719999e3f",
+  "party": "Test Stone 15",
+  "contact": "Person 15",
+  "phone": "+61877001467",
+  "email": "",
+  "country": "Australia",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "Biweekly",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "be3edc0a-1ef2-a4f0-4be0-3db0dc2574bd",
+  "party": "Test Stone 16",
+  "contact": "Person 16",
+  "phone": "+971457228733",
+  "email": "",
+  "country": "UAE",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "b610a9f7-f927-0f4e-b8b3-33a8e5446dd4",
+  "party": "Test Stone 17",
+  "contact": "Person 17",
+  "phone": "+66637729581",
+  "email": "",
+  "country": "Thailand",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "81f9c1f6-6c0f-3459-f79b-17aeefba91fc",
+  "party": "Test Stone 18",
+  "contact": "Person 18",
+  "phone": "+880991244035",
+  "email": "",
+  "country": "Bangladesh",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "Biweekly",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "4da98f1d-3099-fdf5-ab99-254ae901e35c",
+  "party": "Test Stone 19",
+  "contact": "Person 19",
+  "phone": "+1405113796",
+  "email": "",
+  "country": "USA",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "7fd63116-e1ea-24c4-f934-1c68966baea1",
+  "party": "Test Stone 20",
+  "contact": "Person 20",
+  "phone": "+61642544369",
+  "email": "",
+  "country": "Australia",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "08d6af57-da71-1448-96c8-da1964b2d2bc",
+  "party": "Test Stone 21",
+  "contact": "Person 21",
+  "phone": "+971615639791",
+  "email": "",
+  "country": "UAE",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "Biweekly",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "677f6cbd-cc22-af58-be65-21cc3e2434e3",
+  "party": "Test Stone 22",
+  "contact": "Person 22",
+  "phone": "+66544866269",
+  "email": "",
+  "country": "Thailand",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "8c7e134f-5dfb-d3d1-2c4a-3698aa2ca1af",
+  "party": "Test Stone 23",
+  "contact": "Person 23",
+  "phone": "+880854884265",
+  "email": "",
+  "country": "Bangladesh",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "5fec898f-bcfb-b050-acab-1a6bc69d4bd8",
+  "party": "Test Stone 24",
+  "contact": "Person 24",
+  "phone": "+1192843870",
+  "email": "",
+  "country": "USA",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "Biweekly",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "1ba16215-8228-3d15-a9ec-0806705fca16",
+  "party": "Test Stone 25",
+  "contact": "Person 25",
+  "phone": "+61935846392",
+  "email": "",
+  "country": "Australia",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "64ac5db9-d707-107e-855c-384429e821a4",
+  "party": "Test Stone 26",
+  "contact": "Person 26",
+  "phone": "+971497845686",
+  "email": "",
+  "country": "UAE",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "78255d68-0792-3986-bb96-8a437d5c8dfc",
+  "party": "Test Stone 27",
+  "contact": "Person 27",
+  "phone": "+66146694123",
+  "email": "",
+  "country": "Thailand",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "Biweekly",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "fbb230bb-d92a-4aa2-b410-d93c4efbc8d6",
+  "party": "Test Stone 28",
+  "contact": "Person 28",
+  "phone": "+880760147977",
+  "email": "",
+  "country": "Bangladesh",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ },
+ {
+  "id": "a5ac06d8-64c2-f2e3-9403-560d97dae38d",
+  "party": "Test Stone 29",
+  "contact": "Person 29",
+  "phone": "+1282911059",
+  "email": "",
+  "country": "USA",
+  "tzOverride": null,
+  "source": "Exhibition",
+  "status": "",
+  "cadence": "",
+  "contactLog": [
+   {
+    "date": "2026-10-23",
+    "shared": [],
+    "note": ""
+   }
+  ],
+  "notes": "",
+  "dateAdded": "2026-08-31",
+  "updatedAt": "2026-08-31T00:00:00.000Z"
+ }
+]

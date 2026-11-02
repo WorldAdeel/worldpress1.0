@@ -1,0 +1,3 @@
+tests/screenshot-*.png
+node_modules/
+*.zip

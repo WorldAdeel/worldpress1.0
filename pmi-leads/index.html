@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#7a4a1f">
+<meta name="referrer" content="no-referrer">
+<title>PMI Leads</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<script>try{var m=JSON.parse(localStorage.getItem('pl4-meta')||'[]');for(var i=0;i<m.length;i++)if(m[i].id==='lock'&&m[i].on&&m[i].pw)document.documentElement.className='lk';}catch(e){}</script>
+<style>
+:root{--bg:#f4f1ec;--card:#fff;--ink:#1c1917;--mut:#78716c;--line:#e7e1d8;--soft:#f3eee7;--br:#7a4a1f;--red:#c81e1e;--redb:#fdeaea;--amb:#b45309;--ambb:#fdf0dc;--grn:#15803d;--grnb:#e6f5eb;--wa:#1aa855;color-scheme:light dark}
+@media(prefers-color-scheme:dark){:root{--bg:#121010;--card:#1d1a18;--ink:#f2eee9;--mut:#a39d97;--line:#34302c;--soft:#272320;--br:#d39a62;--red:#f87171;--redb:#3a1c1c;--amb:#fbbf24;--ambb:#36290f;--grn:#4ade80;--grnb:#14301f;--wa:#25d366}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.35 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.lk #app{display:none}#lock{display:none}.lk #lock{display:flex}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+input,select,textarea{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%;min-width:0}
+textarea{resize:vertical;min-height:60px}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--br);outline-offset:-1px}
+header{position:sticky;top:0;z-index:5;background:var(--bg);padding:8px 10px 6px;padding-top:max(8px,env(safe-area-inset-top));border-bottom:1px solid var(--line)}
+.top{display:flex;gap:8px;align-items:center}
+.top h1{font-size:17px;margin:0;white-space:nowrap}
+.top .q{flex:1}
+.ib{background:none;border:0;font-size:20px;padding:4px 6px;line-height:1}
+#dot{width:9px;height:9px;border-radius:50%;background:var(--line);display:inline-block}
+#dot.ok{background:var(--grn)}#dot.busy{background:var(--amb)}#dot.err{background:var(--red)}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-top:6px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:4px 11px;white-space:nowrap;font-size:13px}
+.chip.on{background:var(--br);border-color:var(--br);color:#fff}
+.chips select{width:auto;border-radius:99px;padding:3px 8px;font-size:13px}
+main{padding:6px 10px 90px;max-width:760px;margin:0 auto}
+.sum{color:var(--mut);font-size:12.5px;padding:4px 2px}
+h2.g{font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);margin:12px 2px 6px;display:flex;justify-content:space-between;cursor:pointer}
+h2.g.late{color:var(--red)}h2.g.today{color:var(--amb)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin-bottom:6px;display:flex;gap:8px;align-items:flex-start;cursor:pointer}
+.card .c{flex:1;min-width:0}
+.r1{display:flex;gap:6px;align-items:baseline}
+.r1 b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sm{font-size:12.5px;color:var(--mut);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rq{font-size:13px;margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.nx{font-size:12px;border-radius:6px;padding:1px 6px;white-space:nowrap;background:var(--soft);color:var(--mut)}
+.nx.late{background:var(--redb);color:var(--red)}.nx.today{background:var(--ambb);color:var(--amb)}
+.t{font-size:12px}.t.good{color:var(--grn)}.t.ok{color:var(--amb)}.t.late,.t.off{color:var(--mut)}
+.ac{display:flex;gap:6px}
+.ab{border:1px solid var(--line);background:var(--soft);border-radius:8px;min-width:42px;height:38px;font-size:17px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:inherit}
+.ab.wa{background:var(--wa);border-color:var(--wa);color:#fff}
+.ab[disabled]{opacity:.3}
+.more{display:block;width:100%;background:none;border:1px dashed var(--line);border-radius:8px;padding:8px;color:var(--mut)}
+.empty{color:var(--mut);text-align:center;padding:30px 10px}
+#fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));width:56px;height:56px;border-radius:50%;border:0;background:var(--br);color:#fff;font-size:28px;box-shadow:0 3px 10px rgba(0,0,0,.25);z-index:6}
+#sheet{position:fixed;inset:0;z-index:20;background:var(--bg);overflow-y:auto;display:none;padding-bottom:40px}
+#sheet.on{display:block}
+.sh{position:sticky;top:0;background:var(--bg);display:flex;align-items:center;gap:6px;padding:8px 10px;padding-top:max(8px,env(safe-area-inset-top));border-bottom:1px solid var(--line);z-index:2}
+.sh h3{flex:1;margin:0;font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sb{padding:10px;max-width:760px;margin:0 auto}
+.sec{margin:12px 0}
+.lbl{font-size:12px;color:var(--mut);margin:0 0 4px;text-transform:uppercase;letter-spacing:.04em}
+.row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.btn{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:8px 12px;text-decoration:none;color:inherit;display:inline-block}
+.btn.p{background:var(--br);border-color:var(--br);color:#fff}
+.btn.d{color:var(--red)}
+.btn.wa{background:var(--wa);border-color:var(--wa);color:#fff}
+.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{flex:1;border:0;background:var(--card);padding:7px 2px;font-size:13px;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button.on{background:var(--br);color:#fff}
+.log{border-left:2px solid var(--line);margin-left:4px;padding-left:10px}
+.le{padding:4px 0;font-size:14px;display:flex;gap:6px}
+.le .dt{color:var(--mut);font-size:12.5px;white-space:nowrap;min-width:70px}
+.le .tx{flex:1;white-space:pre-wrap;word-break:break-word}
+.le button{background:none;border:0;color:var(--mut);padding:0 4px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px;margin:10px 0}
+.box h4{margin:0 0 8px;font-size:15px}
+.note{font-size:12.5px;color:var(--mut);margin:6px 0}
+.err{color:var(--red)}
+.okc{color:var(--grn)}
+#toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#222;color:#fff;padding:8px 14px;border-radius:8px;font-size:14px;z-index:40;display:none;max-width:90vw}
+#lock{position:fixed;inset:0;z-index:50;background:var(--bg);align-items:center;justify-content:center;padding:20px}
+#lock .in{width:100%;max-width:320px;text-align:center}
+#lock input{margin:10px 0;text-align:center;font-size:17px}
+.code{font:600 18px ui-monospace,monospace;letter-spacing:.06em;background:var(--soft);padding:8px;border-radius:8px;text-align:center;user-select:all}
+@media(min-width:700px){.g4{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<div id="lock"><div class="in">
+ <div style="font-size:40px">🔒</div><h3 style="margin:6px 0">PMI Leads is locked</h3>
+ <form id="lockF"><input id="lockP" type="password" autocomplete="current-password" placeholder="Password"><button class="btn p" style="width:100%">Unlock</button></form>
+ <p class="note">Forgot it? Type your recovery code or your GitHub key in the same box.</p>
+ <p id="lockE" class="err"></p>
+</div></div>
+
+<div id="app">
+<header>
+ <div class="top"><h1>PMI Leads</h1><span id="dot" title="Sync"></span><input id="q" class="q" type="search" placeholder="Search" autocomplete="off"><button class="ib" data-a="settings" aria-label="Settings">⚙️</button></div>
+ <div class="chips" id="chips"></div>
+</header>
+<main id="list"></main>
+<button id="fab" data-a="new" aria-label="Add lead">＋</button>
+</div>
+<div id="sheet"></div>
+<div id="toast"></div>
+
+<script>
+'use strict';
+const VER='4.0';
+const GEO={"IANA":{"Afghanistan":"Asia/Kabul","Albania":"Europe/Tirane","Algeria":"Africa/Algiers","Argentina":"America/Argentina/Buenos_Aires","Armenia":"Asia/Yerevan","Australia":"Australia/Sydney","Australia - Sydney":"Australia/Sydney","Australia - Perth":"Australia/Perth","Austria":"Europe/Vienna","Azerbaijan":"Asia/Baku","Bahrain":"Asia/Bahrain","Bangladesh":"Asia/Dhaka","Belarus":"Europe/Minsk","Belgium":"Europe/Brussels","Bolivia":"America/La_Paz","Bosnia":"Europe/Sarajevo","Brazil":"America/Sao_Paulo","Bulgaria":"Europe/Sofia","Cambodia":"Asia/Phnom_Penh","Cameroon":"Africa/Douala","Canada":"America/Toronto","Canada - Toronto":"America/Toronto","Canada - Vancouver":"America/Vancouver","Canada - Calgary":"America/Edmonton","Chile":"America/Santiago","China":"Asia/Shanghai","Colombia":"America/Bogota","Costa Rica":"America/Costa_Rica","Croatia":"Europe/Zagreb","Cuba":"America/Havana","Cyprus":"Asia/Nicosia","Czech Republic":"Europe/Prague","Denmark":"Europe/Copenhagen","Dominican Republic":"America/Santo_Domingo","Ecuador":"America/Guayaquil","Egypt":"Africa/Cairo","El Salvador":"America/El_Salvador","Estonia":"Europe/Tallinn","Ethiopia":"Africa/Addis_Ababa","Finland":"Europe/Helsinki","France":"Europe/Paris","Georgia":"Asia/Tbilisi","Germany":"Europe/Berlin","Ghana":"Africa/Accra","Greece":"Europe/Athens","Guatemala":"America/Guatemala","Honduras":"America/Tegucigalpa","Hong Kong":"Asia/Hong_Kong","Hungary":"Europe/Budapest","Iceland":"Atlantic/Reykjavik","India":"Asia/Kolkata","Indonesia":"Asia/Jakarta","Indonesia (Jakarta)":"Asia/Jakarta","Iran":"Asia/Tehran","Iraq":"Asia/Baghdad","Ireland":"Europe/Dublin","Israel":"Asia/Jerusalem","Italy":"Europe/Rome","Jamaica":"America/Jamaica","Japan":"Asia/Tokyo","Jordan":"Asia/Amman","Kazakhstan":"Asia/Almaty","Kenya":"Africa/Nairobi","Kuwait":"Asia/Kuwait","Kyrgyzstan":"Asia/Bishkek","Laos":"Asia/Vientiane","Latvia":"Europe/Riga","Lebanon":"Asia/Beirut","Libya":"Africa/Tripoli","Lithuania":"Europe/Vilnius","Luxembourg":"Europe/Luxembourg","Malaysia":"Asia/Kuala_Lumpur","Maldives":"Indian/Maldives","Malta":"Europe/Malta","Mauritius":"Indian/Mauritius","Mexico":"America/Mexico_City","Moldova":"Europe/Chisinau","Mongolia":"Asia/Ulaanbaatar","Morocco":"Africa/Casablanca","Myanmar":"Asia/Yangon","Nepal":"Asia/Kathmandu","Netherlands":"Europe/Amsterdam","New Zealand":"Pacific/Auckland","Nicaragua":"America/Managua","Nigeria":"Africa/Lagos","North Korea":"Asia/Pyongyang","Norway":"Europe/Oslo","Oman":"Asia/Muscat","Pakistan":"Asia/Karachi","Panama":"America/Panama","Paraguay":"America/Asuncion","Peru":"America/Lima","Philippines":"Asia/Manila","Poland":"Europe/Warsaw","Portugal":"Europe/Lisbon","Qatar":"Asia/Qatar","Romania":"Europe/Bucharest","Russia":"Europe/Moscow","Russia - Moscow":"Europe/Moscow","Russia - Vladivostok":"Asia/Vladivostok","Saudi Arabia":"Asia/Riyadh","Serbia":"Europe/Belgrade","Singapore":"Asia/Singapore","Slovakia":"Europe/Bratislava","Slovenia":"Europe/Ljubljana","South Africa":"Africa/Johannesburg","South Korea":"Asia/Seoul","Spain":"Europe/Madrid","Sri Lanka":"Asia/Colombo","Sudan":"Africa/Khartoum","Sweden":"Europe/Stockholm","Switzerland":"Europe/Zurich","Syria":"Asia/Damascus","Taiwan":"Asia/Taipei","Tajikistan":"Asia/Dushanbe","Tanzania":"Africa/Dar_es_Salaam","Thailand":"Asia/Bangkok","Tunisia":"Africa/Tunis","Turkey":"Europe/Istanbul","Turkmenistan":"Asia/Ashgabat","UAE":"Asia/Dubai","Uganda":"Africa/Kampala","Ukraine":"Europe/Kiev","UK":"Europe/London","USA":"America/New_York","USA - New York":"America/New_York","USA - Chicago":"America/Chicago","USA - Denver":"America/Denver","USA - California":"America/Los_Angeles","Uruguay":"America/Montevideo","Uzbekistan":"Asia/Tashkent","Venezuela":"America/Caracas","Vietnam":"Asia/Ho_Chi_Minh","Yemen":"Asia/Aden","Zambia":"Africa/Lusaka","Zimbabwe":"Africa/Harare"},"ISO2":{"Afghanistan":"af","Albania":"al","Algeria":"dz","Argentina":"ar","Armenia":"am","Australia":"au","Austria":"at","Azerbaijan":"az","Bahrain":"bh","Bangladesh":"bd","Belarus":"by","Belgium":"be","Bolivia":"bo","Bosnia":"ba","Brazil":"br","Bulgaria":"bg","Cambodia":"kh","Cameroon":"cm","Canada":"ca","Chile":"cl","China":"cn","Colombia":"co","Costa Rica":"cr","Croatia":"hr","Cuba":"cu","Cyprus":"cy","Czech Republic":"cz","Denmark":"dk","Dominican Republic":"do","Ecuador":"ec","Egypt":"eg","El Salvador":"sv","Estonia":"ee","Ethiopia":"et","Finland":"fi","France":"fr","Georgia":"ge","Germany":"de","Ghana":"gh","Greece":"gr","Guatemala":"gt","Honduras":"hn","Hong Kong":"hk","Hungary":"hu","Iceland":"is","India":"in","Indonesia":"id","Iran":"ir","Iraq":"iq","Ireland":"ie","Israel":"il","Italy":"it","Jamaica":"jm","Japan":"jp","Jordan":"jo","Kazakhstan":"kz","Kenya":"ke","Kuwait":"kw","Kyrgyzstan":"kg","Laos":"la","Latvia":"lv","Lebanon":"lb","Libya":"ly","Lithuania":"lt","Luxembourg":"lu","Malaysia":"my","Maldives":"mv","Malta":"mt","Mauritius":"mu","Mexico":"mx","Moldova":"md","Mongolia":"mn","Morocco":"ma","Myanmar":"mm","Nepal":"np","Netherlands":"nl","New Zealand":"nz","Nicaragua":"ni","Nigeria":"ng","North Korea":"kp","Norway":"no","Oman":"om","Pakistan":"pk","Panama":"pa","Paraguay":"py","Peru":"pe","Philippines":"ph","Poland":"pl","Portugal":"pt","Qatar":"qa","Romania":"ro","Russia":"ru","Saudi Arabia":"sa","Serbia":"rs","Singapore":"sg","Slovakia":"sk","Slovenia":"si","South Africa":"za","South Korea":"kr","Spain":"es","Sri Lanka":"lk","Sudan":"sd","Sweden":"se","Switzerland":"ch","Syria":"sy","Taiwan":"tw","Tajikistan":"tj","Tanzania":"tz","Thailand":"th","Tunisia":"tn","Turkey":"tr","Turkmenistan":"tm","UAE":"ae","Uganda":"ug","Ukraine":"ua","UK":"gb","USA":"us","Uruguay":"uy","Uzbekistan":"uz","Venezuela":"ve","Vietnam":"vn","Yemen":"ye","Zambia":"zm","Zimbabwe":"zw"},"DIAL":{"1":"USA","7":"Russia","20":"Egypt","27":"South Africa","30":"Greece","31":"Netherlands","32":"Belgium","33":"France","34":"Spain","36":"Hungary","39":"Italy","40":"Romania","41":"Switzerland","43":"Austria","44":"UK","45":"Denmark","46":"Sweden","47":"Norway","48":"Poland","49":"Germany","51":"Peru","52":"Mexico","54":"Argentina","55":"Brazil","56":"Chile","57":"Colombia","60":"Malaysia","61":"Australia","62":"Indonesia","63":"Philippines","64":"New Zealand","65":"Singapore","66":"Thailand","81":"Japan","82":"South Korea","84":"Vietnam","86":"China","90":"Turkey","91":"India","92":"Pakistan","93":"Afghanistan","94":"Sri Lanka","95":"Myanmar","98":"Iran","212":"Morocco","213":"Algeria","216":"Tunisia","218":"Libya","230":"Mauritius","233":"Ghana","234":"Nigeria","249":"Sudan","251":"Ethiopia","254":"Kenya","255":"Tanzania","256":"Uganda","351":"Portugal","353":"Ireland","356":"Malta","357":"Cyprus","358":"Finland","359":"Bulgaria","374":"Armenia","380":"Ukraine","381":"Serbia","385":"Croatia","420":"Czech Republic","852":"Hong Kong","855":"Cambodia","856":"Laos","880":"Bangladesh","886":"Taiwan","960":"Maldives","961":"Lebanon","962":"Jordan","963":"Syria","964":"Iraq","965":"Kuwait","966":"Saudi Arabia","967":"Yemen","968":"Oman","971":"UAE","972":"Israel","973":"Bahrain","974":"Qatar","976":"Mongolia","977":"Nepal","992":"Tajikistan","993":"Turkmenistan","994":"Azerbaijan","995":"Georgia","996":"Kyrgyzstan","998":"Uzbekistan"},"WEEKEND":{"Saudi Arabia":[5,6],"Qatar":[5,6],"Kuwait":[5,6],"Bahrain":[5,6],"Oman":[5,6],"Iraq":[5,6],"Jordan":[5,6],"Egypt":[5,6],"Bangladesh":[5,6],"Algeria":[5,6],"Libya":[5,6],"Sudan":[5,6],"Syria":[5,6],"Yemen":[5,6],"Maldives":[5,6],"Israel":[5,6],"Afghanistan":[5],"Iran":[5],"Nepal":[6],"Pakistan":[0],"India":[0]}};
+const {IANA,ISO2,DIAL,WEEKEND}=GEO;
+const LS={leads:'pl4-leads',meta:'pl4-meta',sync:'pl4-sync',ui:'pl4-ui'};
+const STAGES=[['new','New'],['talking','Talking'],['quoted','Quoted'],['customer','Customer'],['closed','Closed']];
+const FOLLOW=[[1,'Tmrw'],[3,'3d'],[7,'1w'],[14,'2w'],[30,'1m']];
+const DEF_CFG={company:'Popular Marble Industries',greet:'Hi',defFollow:7};
+const DEF_TPL=[
+ {t:'Check-in',x:'{greet} {name},\nHope you are doing well. Any new requirement? We have fresh ready stock.'},
+ {t:'Quote follow-up',x:'{greet} {name},\nFollowing up on our quotation for {req}. Any feedback? Happy to adjust size, finish or quantity.'},
+ {t:'Intro',x:'{greet} {name},\nGreetings from {company}: direct exporters of marble, limestone, travertine & onyx from our own quarries and factory.\nWhich materials are you working with these days?'}];
+
+/* ---------- utils ---------- */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad=n=>String(n).padStart(2,'0');
+const isoOf=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const today=()=>isoOf(new Date());
+function addDays(n,from){const d=from?new Date(from+'T00:00:00'):new Date();d.setDate(d.getDate()+n);return isoOf(d);}
+function dDiff(a,b){return Math.round((new Date(a+'T00:00:00')-new Date(b+'T00:00:00'))/864e5);}
+const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+function fmtD(s,dow){if(!s)return '';const d=new Date(s+'T00:00:00');if(isNaN(d))return s;return (dow?DOW[d.getDay()]+' ':'')+d.getDate()+' '+MON[d.getMonth()]+(d.getFullYear()!==new Date().getFullYear()?' '+d.getFullYear():'');}
+function uid(){return crypto.randomUUID?crypto.randomUUID():'id'+Date.now().toString(36)+Math.random().toString(36).slice(2,10);}
+let lastU=0;function stamp(){let t=Date.now();if(t<=lastU)t=lastU+1;lastU=t;return t;}
+function load(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v);}catch(e){return d;}}
+function store(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true;}catch(e){toast('⚠ Could not save on this device');return false;}}
+let tT;function toast(m,ms){const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(tT);tT=setTimeout(()=>t.style.display='none',ms||2200);}
+const digits=s=>String(s||'').replace(/\D/g,'');
+function firstPhone(p){const parts=String(p||'').split(/[,;\/]|\s{2,}/);for(const x of parts){const d=digits(x);if(d.length>=7)return d.replace(/^00/,'');}return '';}
+function firstEmail(e){const m=String(e||'').match(/[^\s,;]+@[^\s,;]+/);return m?m[0]:'';}
+function flag(c){const i=ISO2[c];return i?String.fromCodePoint(...[...i.toUpperCase()].map(ch=>127397+ch.charCodeAt(0))):'';}
+function countryFromPhone(p){const d=firstPhone(p);for(let n=4;n>0;n--){if(DIAL[d.slice(0,n)])return DIAL[d.slice(0,n)];}return '';}
+const fmtC={};
+function theirTime(c){const z=IANA[c];if(!z)return null;try{const f=fmtC[z]||(fmtC[z]=new Intl.DateTimeFormat('en-GB',{timeZone:z,hour:'2-digit',minute:'2-digit',weekday:'short',hourCycle:'h23'}));const p={};f.formatToParts(new Date()).forEach(x=>p[x.type]=x.value);const h=+p.hour,wd=DOW.indexOf(p.weekday);const we=WEEKEND[c]||[0,6];const w=we.includes(wd)?'off':(h>=9&&h<18)?'good':((h>=8&&h<9)||(h>=18&&h<21))?'ok':'late';return {s:p.hour+':'+p.minute,w};}catch(e){return null;}}
+const WL={good:'good time',ok:'OK time',late:'after hours',off:'weekend'};
+
+/* ---------- data ---------- */
+let leads=load(LS.leads,null);
+let meta=load(LS.meta,[]);
+let S=load(LS.sync,{});if(!S.shas)S.shas={};if(!Array.isArray(S.dirty))S.dirty=[];
+let UI=Object.assign({stage:'',country:'',open:{}},load(LS.ui,{}));
+
+function fromLegacy(l){
+  const log=(l.contactLog||[]).filter(e=>e&&e.date).map(e=>({d:e.date,n:[(e.shared&&e.shared.length?'Shared '+e.shared.join(', '):''),e.note||'',e.sent?'Sent '+e.sent:''].filter(Boolean).join(' · ')}));
+  const last=log.reduce((a,e)=>e.d>a?e.d:a,'');
+  const cd={Tomorrow:1,Active:3,Weekly:7,Biweekly:14,Monthly:30}[l.cadence];
+  let next=(l.next&&l.next.date)||l.snoozeUntil||'';if(!next&&cd&&last)next=addDays(cd,last);
+  let st=l.stage||'';if(st==='sample')st='quoted';if(st==='order')st='customer';if(l.archived)st='closed';
+  if(!STAGES.some(s=>s[0]===st))st=/customer/i.test(l.source||'')?'customer':(log.length?'talking':'new');
+  const added=l.dateAdded||String(l.createdAt||'').slice(0,10)||today();
+  return {id:l.id||uid(),u:Date.parse(l.updatedAt||l.lastActivity||'')||Date.now(),company:l.party||'',contact:l.contact||'',phone:l.phone||'',email:l.email||'',country:l.country||'',source:l.source||'',stage:st,req:{mat:(l.interests&&l.interests.join?l.interests.join(', '):''),size:'',qty:'',price:''},next,what:(l.next&&l.next.what)||(l.toSend?'Send '+l.toSend:''),notes:[l.status,l.notes].filter(Boolean).join('\n'),log,added,m:added.slice(0,7)};
+}
+function fix(l){['company','contact','phone','email','country','source','next','what','notes'].forEach(k=>{if(l[k]==null)l[k]='';});
+  if(!l.req||typeof l.req!=='object')l.req={};['mat','size','qty','price'].forEach(k=>{if(l.req[k]==null)l.req[k]='';});
+  if(!Array.isArray(l.log))l.log=[];if(!l.stage)l.stage='new';if(!l.added)l.added=today();if(!/^\d{4}-\d\d$/.test(l.m||''))l.m=l.added.slice(0,7);if(typeof l.u!=='number')l.u=Date.now();return l;}
+function isLegacy(l){return l&&(l.party!==undefined||l.contactLog!==undefined)&&l.company===undefined;}
+function toRec(l){return fix(isLegacy(l)?fromLegacy(l):Object.assign({},l));}
+
+if(!Array.isArray(leads)){ // first run: pick up older version data saved on this same site
+  leads=[];for(const k of ['pmi3-leads','pmi-leads']){const old=load(k,null);if(Array.isArray(old)&&old.length){leads=old.map(toRec);break;}}
+  store(LS.leads,leads);
+}
+leads=leads.map(fix);
+const live=()=>leads.filter(l=>!l.del);
+function persist(){store(LS.leads,leads);store(LS.meta,meta);}
+function saveSync(){store(LS.sync,S);}
+function saveUI(){store(LS.ui,UI);}
+function M(id){return meta.find(r=>r.id===id);}
+function cfg(){return Object.assign({},DEF_CFG,M('cfg')||{});}
+function tpls(){const t=M('tpl');return t&&Array.isArray(t.list)?t.list:DEF_TPL;}
+function putMeta(r){r.u=stamp();const i=meta.findIndex(x=>x.id===r.id);if(i<0)meta.push(r);else meta[i]=r;persist();dirty('m:'+r.id);}
+function touch(l){l.u=stamp();persist();dirty(l.id);}
+function dirty(id){if(!S.dirty.includes(id))S.dirty.push(id);saveSync();schedule();}
+function newer(a,b){if(!b)return true;if(a.u!==b.u)return a.u>b.u;return JSON.stringify(a)>JSON.stringify(b);}
+const lastLog=l=>l.log.reduce((a,e)=>(!a||e.d>=a.d)?e:a,null);
+function reqText(l){const r=l.req||{};return [r.mat,r.size,r.qty,r.price].filter(Boolean).join(' · ');}
+function title(l){return l.company||l.contact||firstPhone(l.phone)||'(no name)';}
+
+/* ---------- list ---------- */
+function bucket(l){if(l.stage==='closed')return 'closed';if(!l.next)return 'none';const d=dDiff(l.next,today());return d<0?'late':d===0?'today':'soon';}
+function nxBadge(l){if(!l.next||l.stage==='closed')return '';const d=dDiff(l.next,today());if(d<0)return '<span class="nx late">'+(-d)+'d late</span>';if(d===0)return '<span class="nx today">Today</span>';return '<span class="nx">'+(d===1?'Tmrw':d<7?DOW[new Date(l.next+'T00:00:00').getDay()]:fmtD(l.next))+'</span>';}
+function card(l){const t=theirTime(l.country),ph=firstPhone(l.phone),ll=lastLog(l),rq=reqText(l);
+  return '<div class="card" data-a="open" data-id="'+l.id+'"><div class="c"><div class="r1"><b>'+flag(l.country)+' '+esc(title(l))+'</b>'+nxBadge(l)+'</div>'
+  +'<div class="sm">'+esc([l.company&&l.contact?l.contact:'',l.country].filter(Boolean).join(' · '))+(t?' · <span class="t '+t.w+'">● '+t.s+'</span>':'')+'</div>'
+  +(rq?'<div class="rq">📦 '+esc(rq)+'</div>':'')
+  +(l.what?'<div class="rq">➡️ '+esc(l.what)+'</div>':'')
+  +(ll?'<div class="sm">'+fmtD(ll.d)+(ll.n?' — '+esc(ll.n):'')+'</div>':'')
+  +'</div><div class="ac">'+(ph?'<a class="ab wa" data-a="wa" href="https://wa.me/'+ph+'" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>':'')+'<button class="ab" data-a="done" aria-label="Done">✓</button></div></div>';}
+function match(l,q){return [l.company,l.contact,l.phone,l.email,l.country,l.source,l.notes,l.what,reqText(l),...l.log.map(e=>e.n)].join(' ').toLowerCase().includes(q);}
+function render(){
+  if(document.documentElement.classList.contains('lk'))return;
+  const L=live();const q=$('#q').value.trim().toLowerCase();
+  const cs={};L.forEach(l=>{if(l.country)cs[l.country]=(cs[l.country]||0)+1;});
+  $('#chips').innerHTML='<button class="chip'+(!UI.stage?' on':'')+'" data-a="stage" data-v="">All</button>'+STAGES.map(s=>'<button class="chip'+(UI.stage===s[0]?' on':'')+'" data-a="stage" data-v="'+s[0]+'">'+s[1]+'</button>').join('')
+   +'<select id="cty"><option value="">🌍 All countries</option>'+Object.keys(cs).sort().map(c=>'<option'+(UI.country===c?' selected':'')+' value="'+esc(c)+'">'+flag(c)+' '+esc(c)+' ('+cs[c]+')</option>').join('')+'</select>';
+  let F=L.filter(l=>(!UI.stage||l.stage===UI.stage)&&(!UI.country||l.country===UI.country)&&(!q||match(l,q)));
+  const t=today(),doneT=L.filter(l=>l.log.some(e=>e.d===t)).length;
+  let h='<div class="sum">'+F.length+' leads · '+doneT+' contacted today'+(S.on?'':' · <a href="#" data-a="settings">sync off</a>')+'</div>';
+  if(!L.length)h+='<div class="empty">No leads yet.<br><br><button class="btn p" data-a="new">＋ Add a lead</button> <button class="btn" data-a="paste">Paste a list</button> <button class="btn" data-a="import">Import backup</button></div>';
+  else if(!F.length)h+='<div class="empty">Nothing matches.</div>';
+  else if(q||UI.stage==='closed'){F.sort((a,b)=>title(a).localeCompare(title(b)));h+=group('res','Results',F,true);}
+  else{const G={late:[],today:[],soon:[],none:[],closed:[]};F.forEach(l=>G[bucket(l)].push(l));
+    G.late.sort((a,b)=>a.next.localeCompare(b.next));G.soon.sort((a,b)=>a.next.localeCompare(b.next));
+    const byLast=(a,b)=>((lastLog(b)||{}).d||'').localeCompare((lastLog(a)||{}).d||'');G.none.sort(byLast);G.closed.sort(byLast);
+    h+=group('late','Overdue',G.late,true)+group('today','Today',G.today,true)+group('soon','Upcoming',G.soon,true)+group('none','No follow-up date',G.none,false)+(UI.stage?'':group('closed','Closed',G.closed,false));}
+  $('#list').innerHTML=h;}
+function group(k,name,arr,def){if(!arr.length)return '';const st=UI.open[k]===undefined?def:UI.open[k];const lim=UI['lim_'+k]||40;
+  return '<h2 class="g '+k+'" data-a="grp" data-v="'+k+'" data-d="'+(def?1:0)+'"><span>'+(st?'▾ ':'▸ ')+name+' ('+arr.length+')</span></h2>'+(st?arr.slice(0,lim).map(card).join('')+(arr.length>lim?'<button class="more" data-a="lim" data-v="'+k+'">Show '+(arr.length-lim)+' more</button>':''):'');}
+
+/* ---------- sheet ---------- */
+let sheetOn=false,cur=null;
+function openSheet(html){$('#sheet').innerHTML=html;$('#sheet').classList.add('on');$('#sheet').scrollTop=0;if(!sheetOn){history.pushState({s:1},'');sheetOn=true;}}
+function closeSheet(fromPop){if(!sheetOn)return;sheetOn=false;cur=null;$('#sheet').classList.remove('on');$('#sheet').innerHTML='';if(!fromPop)history.back();render();}
+addEventListener('popstate',()=>{if(sheetOn)closeSheet(true);});
+const head=(t,extra)=>'<div class="sh"><button class="ib" data-a="close" aria-label="Back">←</button><h3>'+t+'</h3>'+(extra||'')+'</div>';
+const byId=id=>leads.find(l=>l.id===id);
+
+function fld(l,f,label,type,list){const v=f.startsWith('req.')?l.req[f.slice(4)]:l[f];
+  if(type==='ta')return '<label><div class="lbl">'+label+'</div><textarea data-f="'+f+'">'+esc(v)+'</textarea></label>';
+  return '<label><div class="lbl">'+label+'</div><input data-f="'+f+'" value="'+esc(v)+'"'+(type?' type="'+type+'"':'')+(list?' list="'+list+'"':'')+'></label>';}
+function lists(){const L=live();const src=[...new Set(['Exhibition','Direct','Customer','Website','Referral',...L.map(l=>l.source).filter(Boolean)])];
+  return '<datalist id="dlC">'+Object.keys(IANA).sort().map(c=>'<option value="'+esc(c)+'">').join('')+'</datalist><datalist id="dlS">'+src.map(s=>'<option value="'+esc(s)+'">').join('')+'</datalist>';}
+function reqBlock(l){return '<div class="sec"><div class="lbl">Requirement</div><div class="g2 g4">'+['mat:Material','size:Size / finish','qty:Quantity','price:Target price'].map(x=>{const[k,p]=x.split(':');return '<input data-f="req.'+k+'" placeholder="'+p+'" value="'+esc(l.req[k])+'">';}).join('')+'</div></div>';}
+function nextBlock(l){return '<div class="sec"><div class="lbl">Next follow-up</div><div class="row">'+FOLLOW.map(f=>'<button class="chip'+(l.next===addDays(f[0])?' on':'')+'" data-a="setnext" data-v="'+f[0]+'">'+f[1]+'</button>').join('')+'<button class="chip" data-a="setnext" data-v="">✕ None</button><input type="date" data-f="next" value="'+esc(l.next)+'" style="width:auto"></div><div style="margin-top:6px"><input data-f="what" placeholder="What to do next (e.g. send price, samples)" value="'+esc(l.what)+'"></div></div>';}
+function stageBlock(l){return '<div class="sec"><div class="lbl">Stage</div><div class="seg">'+STAGES.map(s=>'<button class="'+(l.stage===s[0]?'on':'')+'" data-a="setstage" data-v="'+s[0]+'">'+s[1]+'</button>').join('')+'</div></div>';}
+
+function openLead(id){const l=byId(id);if(!l)return;cur=l;const ph=firstPhone(l.phone),em=firstEmail(l.email),t=theirTime(l.country);
+  const logs=l.log.map((e,i)=>[e,i]).sort((a,b)=>b[0].d.localeCompare(a[0].d)||b[1]-a[1]);
+  openSheet(head(flag(l.country)+' '+esc(title(l)))+'<div class="sb">'
+   +(t?'<div class="note">Their time: <span class="t '+t.w+'">● '+t.s+' ('+WL[t.w]+')</span></div>':'')
+   +'<div class="row">'+(ph?'<a class="btn wa" href="https://wa.me/'+ph+'" target="_blank" rel="noopener">💬 WhatsApp</a><a class="btn" href="tel:+'+ph+'">📞 Call</a><button class="btn" data-a="copy" data-v="+'+ph+'">📋 Copy #</button>':'<span class="note">No phone number</span>')+(em?'<a class="btn" href="mailto:'+esc(em)+'">✉️ Email</a>':'')+'</div>'
+   +'<div class="sec"><div class="lbl">Log contact</div><div class="row" style="flex-wrap:nowrap"><input id="nt" placeholder="What happened? (optional)"><button class="btn p" data-a="addlog">Add</button></div><div class="note">Adds today\'s date to the timeline.</div></div>'
+   +nextBlock(l)+reqBlock(l)+stageBlock(l)
+   +(ph||em?'<div class="sec"><div class="lbl">Send a template</div><div class="row">'+tpls().map((x,i)=>'<button class="chip" data-a="tpl" data-v="'+i+'">'+esc(x.t)+'</button>').join('')+'</div></div>':'')
+   +'<div class="sec"><div class="lbl">Timeline ('+l.log.length+')</div><div class="log">'+(logs.length?logs.map(([e,i])=>'<div class="le"><span class="dt">'+fmtD(e.d)+'</span><span class="tx">'+esc(e.n||'—')+'</span><button data-a="dellog" data-v="'+i+'" aria-label="Remove">✕</button></div>').join(''):'<div class="note">No contact logged yet.</div>')+'</div></div>'
+   +'<div class="box"><h4>Details</h4><div class="g2">'+fld(l,'company','Company')+fld(l,'contact','Contact person')+fld(l,'phone','Phone / WhatsApp','tel')+fld(l,'email','Email','email')+fld(l,'country','Country','','dlC')+fld(l,'source','Source','','dlS')+'</div><div style="margin-top:6px">'+fld(l,'notes','Notes','ta')+'</div><div class="note">Added '+fmtD(l.added)+'. Changes save automatically.</div></div>'
+   +'<button class="btn d" data-a="del">🗑 Delete lead</button>'+lists()+'</div>');}
+
+function openNew(){const l=fix({id:uid(),stage:'new',added:today(),next:''});cur=Object.assign(l,{_new:1});
+  openSheet(head('New lead')+'<div class="sb"><div class="g2">'+fld(l,'company','Company')+fld(l,'contact','Contact person')+fld(l,'phone','Phone / WhatsApp','tel')+fld(l,'country','Country','','dlC')+'</div>'
+   +reqBlock(l)+nextBlock(l)+'<details><summary class="note">More: email, source, notes</summary><div class="g2">'+fld(l,'email','Email','email')+fld(l,'source','Source','','dlS')+'</div><div style="margin-top:6px">'+fld(l,'notes','Notes','ta')+'</div></details>'
+   +'<div class="row" style="margin-top:12px"><button class="btn p" data-a="savenew">Save</button><button class="btn" data-a="savenew" data-v="more">Save & add another</button></div>'+lists()+'</div>');
+  setTimeout(()=>{const i=$('#sheet [data-f=company]');if(i)i.focus();},50);}
+
+function openDone(id){const l=byId(id);if(!l)return;cur=l;
+  openSheet(head('✓ '+esc(title(l)))+'<div class="sb"><div class="sec"><div class="lbl">What happened?</div><input id="nt" placeholder="e.g. sent price, asked for photos (optional)"></div>'
+   +'<div class="sec"><div class="lbl">Next follow-up — tap to save</div><div class="row">'+FOLLOW.map(f=>'<button class="btn" data-a="donesave" data-v="'+f[0]+'">'+f[1]+'</button>').join('')+'<button class="btn" data-a="donesave" data-v="">No date</button></div></div>'
+   +'<div class="sec"><div class="lbl">Next step (optional)</div><input id="dw" placeholder="e.g. send samples" value="'+esc(l.what)+'"></div>'+stageBlock(l)+'</div>');
+  setTimeout(()=>{const i=$('#nt');if(i)i.focus();},50);}
+
+function setField(l,f,v){if(f.startsWith('req.'))l.req[f.slice(4)]=v;else l[f]=v;
+  if(f==='phone'&&!l.country){const c=countryFromPhone(v);if(c){l.country=c;const ci=$('#sheet [data-f=country]');if(ci)ci.value=c;}}}
+document.addEventListener('change',e=>{const el=e.target;
+  if(el.id==='cty'){UI.country=el.value;saveUI();render();return;}
+  const f=el.dataset&&el.dataset.f;if(!f||!cur)return;setField(cur,f,el.value.trim?el.value.trim():el.value);
+  if(!cur._new){touch(cur);toast('Saved ✓',900);if(f==='next')openLead(cur.id);}});
+let qT;$('#q').addEventListener('input',()=>{clearTimeout(qT);qT=setTimeout(render,120);});
+
+document.addEventListener('click',async e=>{const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,v=b.dataset.v;
+  const cid=b.closest('[data-id]')&&b.closest('[data-id]').dataset.id;
+  if(a==='wa'){e.stopPropagation();return;}
+  if(b.tagName==='A'&&a!=='settings'&&a!=='wa')return;
+  e.preventDefault();
+  switch(a){
+  case 'open':return openLead(cid);
+  case 'done':e.stopPropagation();return openDone(cid);
+  case 'new':return openNew();
+  case 'close':return closeSheet();
+  case 'stage':UI.stage=v;saveUI();return render();
+  case 'grp':{const d=b.dataset.d==='1';const st=UI.open[v]===undefined?d:UI.open[v];UI.open[v]=!st;saveUI();return render();}
+  case 'lim':UI['lim_'+v]=(UI['lim_'+v]||40)+100;return render();
+  case 'copy':return copy(v);
+  case 'setnext':{if(!cur)return;cur.next=v?addDays(+v):'';if(cur._new){b.parentNode.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c===b&&!!v));const di=$('#sheet [data-f=next]');if(di)di.value=cur.next;return;}touch(cur);toast(v?'Follow-up '+fmtD(cur.next,1):'No follow-up date');return openLead(cur.id);}
+  case 'setstage':{if(!cur)return;cur.stage=v;b.parentNode.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));if(!cur._new)touch(cur);return;}
+  case 'addlog':{const n=$('#nt').value.trim();cur.log.push({d:today(),n});touch(cur);toast('Logged ✓');return openLead(cur.id);}
+  case 'dellog':{if(!confirm('Remove this timeline entry?'))return;cur.log.splice(+v,1);touch(cur);return openLead(cur.id);}
+  case 'donesave':{const l=cur;const n=$('#nt').value.trim();l.log.push({d:today(),n});l.next=v?addDays(+v):'';l.what=$('#dw').value.trim();if(l.stage==='new')l.stage='talking';touch(l);closeSheet();return toast('✓ Done'+(l.next?' · next '+fmtD(l.next,1):''));}
+  case 'savenew':{const l=cur;if(!(l.company||l.contact||l.phone)){toast('Add a company, contact or phone');return;}delete l._new;
+    const ph=firstPhone(l.phone);if(ph&&live().some(x=>firstPhone(x.phone)===ph)&&!confirm('A lead with this phone number already exists. Save anyway?'))return;
+    l.m=l.added.slice(0,7);leads.push(l);touch(l);toast('Lead saved ✓');if(v==='more')return openNew();return closeSheet();}
+  case 'del':{if(!confirm('Delete '+title(cur)+'? (You can restore it from Settings › Recycle bin)'))return;cur.del=1;touch(cur);closeSheet();return toast('Deleted');}
+  case 'tpl':return sendTpl(cur,tpls()[+v]);
+  case 'settings':return openSettings();
+  case 'paste':return openPaste();
+  case 'pasteadd':return pasteAdd();
+  case 'import':return pickImport();
+  case 'restore':{const l=byId(v);if(l){delete l.del;touch(l);toast('Restored');}return openBin();}
+  case 'bin':return openBin();
+  default:if(ACT[a])return ACT[a](b,v);}
+});
+function copy(t){(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast('Copied '+t),()=>{prompt('Copy:',t);});}
+function fillTpl(l,x){const c=cfg();const nm=(l.contact||'').split(/[ ,]/)[0]||l.company||'';return x.replace(/\{greet\}/g,c.greet).replace(/\{name\}/g,nm).replace(/\{company\}/g,c.company).replace(/\{req\}/g,l.req.mat||'our materials');}
+function sendTpl(l,t){if(!l||!t)return;const txt=fillTpl(l,t.x),ph=firstPhone(l.phone);
+  if(ph)window.open('https://wa.me/'+ph+'?text='+encodeURIComponent(txt),'_blank','noopener');else copy(txt);}
+
+/* ---------- paste list ---------- */
+const CN=Object.keys(IANA).reduce((o,c)=>(o[c.toLowerCase()]=c,o),{});
+function parseLine(s){const parts=s.split(/\t|\s\|\s|;|,(?![^(]*\))/).map(x=>x.trim()).filter(Boolean);const l={company:'',contact:'',phone:'',email:'',country:'',rest:[]};
+  for(const p of parts){if(/@/.test(p)&&!l.email)l.email=p;else if(/^[+\d][\d\s\-().]{6,}$/.test(p)&&digits(p).length>=7)l.phone=l.phone?l.phone+', '+p:p;else if(CN[p.toLowerCase()]&&!l.country)l.country=CN[p.toLowerCase()];else if(!l.company)l.company=p;else if(!l.contact)l.contact=p;else l.rest.push(p);}
+  if(!l.country)l.country=countryFromPhone(l.phone);return l;}
+function openPaste(){openSheet(head('Paste a list of leads')+'<div class="sb"><p class="note">One lead per line. Separate with commas or tabs (copy straight from Excel). Order doesn\'t matter: emails, phone numbers and countries are detected. First text = company, second = contact, the rest = requirement.</p><textarea id="pt" rows="10" placeholder="Stone Gallery, Scott, +61 400 000 000, Australia, cream travertine"></textarea><div class="row" style="margin-top:8px"><button class="btn p" data-a="pasteadd">Add leads</button><span class="note" id="pc"></span></div></div>');
+  $('#pt').addEventListener('input',()=>{const n=$('#pt').value.split('\n').filter(x=>x.trim()).length;$('#pc').textContent=n?n+' line(s)':'';});}
+function pasteAdd(){const lines=$('#pt').value.split('\n').map(x=>x.trim()).filter(Boolean);let add=0,dup=0;const phs=new Set(live().map(l=>firstPhone(l.phone)).filter(Boolean));
+  for(const s of lines){const p=parseLine(s);const ph=firstPhone(p.phone);if(ph&&phs.has(ph)){dup++;continue;}if(ph)phs.add(ph);
+    const l=fix({id:uid(),company:p.company,contact:p.contact,phone:p.phone,email:p.email,country:p.country,stage:'new',added:today(),req:{mat:p.rest.join(', ')}});leads.push(l);touch(l);add++;}
+  closeSheet();toast(add+' added'+(dup?' · '+dup+' duplicate(s) skipped':''),3500);}
+
+/* ---------- backup ---------- */
+function backupObj(){return {app:'pmi-leads',version:4,exported:new Date().toISOString(),leads,meta:meta.filter(r=>r.id!=='lock')};}
+function stampName(ext){const d=new Date();return 'pmi-leads-backup-'+today()+'-'+pad(d.getHours())+pad(d.getMinutes())+'.'+ext;}
+function dl(name,txt,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type}));a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);}
+function markBackup(){UI.lastBackup=Date.now();saveUI();}
+const ACT={};
+ACT.share=async()=>{const txt=JSON.stringify(backupObj());const f=new File([txt],stampName('txt'),{type:'text/plain'});
+  if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],title:'PMI Leads backup'});markBackup();return toast('Backup sent ✓');}catch(e){if(e.name==='AbortError')return;}}
+  dl(stampName('txt'),txt,'text/plain');markBackup();toast('Backup downloaded');};
+ACT.json=()=>{dl(stampName('json'),JSON.stringify(backupObj(),null,1),'application/json');markBackup();toast('Backup downloaded');};
+ACT.csv=()=>{const cols=['company','contact','phone','email','country','source','stage','material','size_finish','quantity','target_price','next_followup','next_step','last_contact','last_note','notes','added'];
+  const q=s=>'"'+String(s==null?'':s).replace(/"/g,'""')+'"';
+  const rows=live().map(l=>{const ll=lastLog(l)||{};return [l.company,l.contact,l.phone,l.email,l.country,l.source,l.stage,l.req.mat,l.req.size,l.req.qty,l.req.price,l.next,l.what,ll.d,ll.n,l.notes,l.added].map(q).join(',');});
+  dl(stampName('csv'),'﻿'+cols.join(',')+'\n'+rows.join('\n'),'text/csv');toast('CSV downloaded');};
+function pickImport(){const i=document.createElement('input');i.type='file';i.accept='.json,.txt,application/json,text/plain';i.multiple=true;i.onchange=async()=>{const msg=[];for(const f of i.files){try{msg.push(f.name+': '+importData(JSON.parse(await f.text())));}catch(e){msg.push(f.name+': not a valid backup');}}toast(msg.join(' | '),5000);if(sheetOn)openSettings();else render();};i.click();}
+function importData(o){let arr=null,mt=[];
+  if(Array.isArray(o))arr=o;else if(o&&Array.isArray(o.leads)){arr=o.leads;if(Array.isArray(o.meta))mt=o.meta;
+    else if(Array.isArray(o.templates)&&o.templates.length&&!M('tpl'))mt=[{id:'tpl',u:1,list:o.templates.filter(t=>t&&t.x).map(t=>({t:t.t||'Template',x:t.x}))}];}
+  if(!arr)throw new Error('format');let add=0,upd=0;
+  for(const raw of arr){if(!raw||typeof raw!=='object'||raw.del)continue;const r=toRec(raw);const i=leads.findIndex(x=>x.id===r.id);
+    if(i<0){leads.push(r);add++;dirty(r.id);}else if(newer(r,leads[i])){leads[i]=r;upd++;dirty(r.id);}}
+  for(const r of mt){if(!r||!r.id||r.id==='lock')continue;const i=meta.findIndex(x=>x.id===r.id);if(i<0||newer(r,meta[i])){if(i<0)meta.push(r);else meta[i]=r;dirty('m:'+r.id);}}
+  persist();return add+' new, '+upd+' updated';}
+
+/* ---------- crypto ---------- */
+const TE=new TextEncoder(),TD=new TextDecoder();
+const b64=u8=>{let s='';for(let i=0;i<u8.length;i+=0x8000)s+=String.fromCharCode.apply(null,u8.subarray(i,i+0x8000));return btoa(s);};
+const unb64=s=>Uint8Array.from(atob(String(s).replace(/\s/g,'')),c=>c.charCodeAt(0));
+const rand=n=>crypto.getRandomValues(new Uint8Array(n));
+const ITER=310000;
+async function pbkdf(pw,salt,iter){const k=await crypto.subtle.importKey('raw',TE.encode(pw),'PBKDF2',false,['deriveBits']);return new Uint8Array(await crypto.subtle.deriveBits({name:'PBKDF2',hash:'SHA-256',salt,iterations:iter||ITER},k,256));}
+const aes=raw=>crypto.subtle.importKey('raw',raw,'AES-GCM',false,['encrypt','decrypt']);
+async function gz(u8,on){if(!window.CompressionStream)return null;const s=new Blob([u8]).stream().pipeThrough(on?new CompressionStream('gzip'):new DecompressionStream('gzip'));return new Uint8Array(await new Response(s).arrayBuffer());}
+async function seal(key,obj){let p=TE.encode(JSON.stringify(obj)),f=0;const z=await gz(p,1);if(z){p=z;f=1;}const iv=rand(12);const ct=new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv},key,p));const o=new Uint8Array(14+ct.length);o[0]=1;o[1]=f;o.set(iv,2);o.set(ct,14);return o;}
+async function unseal(key,u8){if(u8[0]!==1)throw new Error('Unknown file format');let p=new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM',iv:u8.subarray(2,14)},key,u8.subarray(14)));if(u8[1]&1){const z=await gz(p,0);if(!z)throw new Error('This browser cannot unzip');p=z;}return JSON.parse(TD.decode(p));}
+
+/* ---------- GitHub sync ---------- */
+const API='https://api.github.com';
+async function gh(method,path,body){let r;
+  try{r=await fetch(API+path,{method,cache:'no-store',headers:Object.assign({Authorization:'Bearer '+S.token,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'},body?{'Content-Type':'application/json'}:{}),body:body?JSON.stringify(body):undefined});}
+  catch(e){const x=new Error('Offline');x.offline=1;throw x;}
+  let j=null;try{j=await r.json();}catch(e){}
+  if(!r.ok){const x=new Error((j&&j.message)||('HTTP '+r.status));x.status=r.status;throw x;}return j;}
+const R=()=>'/repos/'+encodeURIComponent(S.owner)+'/'+encodeURIComponent(S.repo);
+async function ls(dir){try{const j=await gh('GET',R()+'/contents'+(dir?'/'+dir:''));return Array.isArray(j)?j:[];}catch(e){if(e.status===404)return [];throw e;}}
+async function blob(sha){const j=await gh('GET',R()+'/git/blobs/'+sha);return unb64(j.content);}
+async function put(path,u8,sha){const j=await gh('PUT',R()+'/contents/'+path,Object.assign({message:'sync '+path,content:b64(u8)},sha?{sha}:{}));return j.content.sha;}
+let keyObj=null,syncing=false,again=false,syncT=null,repoOK=false;
+async function K(){if(!keyObj)keyObj=await aes(unb64(S.key));return keyObj;}
+function schedule(ms){if(!S.on)return;clearTimeout(syncT);syncT=setTimeout(sync,ms==null?2500:ms);}
+function setDot(c,t){const d=$('#dot');d.className=c||'';d.title=t||'';const s=$('#syncSt');if(s)s.innerHTML=syncStatus();}
+async function checkRepo(){const info=await gh('GET',R());if(!info.private){const x=new Error('Repo "'+S.owner+'/'+S.repo+'" is PUBLIC. Make it private first. Sync refused.');x.pub=1;throw x;}repoOK=true;}
+async function sync(){if(!S.on||!S.key)return;if(syncing){again=true;return;}syncing=true;setDot('busy','Syncing…');
+  try{if(!repoOK)await checkRepo();await pull();await push();S.last=Date.now();S.err='';setDot('ok','Synced');}
+  catch(e){S.err=e.message;if(e.pub)S.on=false;setDot(e.offline?'':'err',e.offline?'Offline, will sync later':'Sync error: '+e.message);}
+  finally{saveSync();syncing=false;if(again){again=false;schedule(400);}}}
+function arrFor(p){return p==='meta.bin'?meta:leads;}
+function mergeIn(p,recs){if(!Array.isArray(recs))return false;const arr=arrFor(p);let ch=false;
+  for(const r of recs){if(!r||!r.id)continue;const i=arr.findIndex(x=>x.id===r.id);if(i<0){arr.push(p==='meta.bin'?r:fix(r));ch=true;}else if(newer(r,arr[i])){arr[i]=p==='meta.bin'?r:fix(r);ch=true;}}
+  if(ch&&p==='meta.bin')afterMeta();return ch;}
+async function pull(){const root=await ls('');const files=[];
+  for(const f of root){if(f.name==='meta.bin')files.push(f);if(f.name==='data'&&f.type==='dir')(await ls('data')).forEach(x=>{if(/\.bin$/.test(x.name))files.push(x);});}
+  let ch=false;for(const f of files){if(S.shas[f.path]===f.sha)continue;if(mergeIn(f.path,await unseal(await K(),await blob(f.sha))))ch=true;S.shas[f.path]=f.sha;}
+  if(ch){persist();refresh();}}
+const pathOf=id=>{if(id.startsWith('m:'))return 'meta.bin';const l=byId(id);return l?'data/'+l.m+'.bin':null;};
+const recOf=id=>id.startsWith('m:')?M(id.slice(2)):byId(id);
+async function push(){if(!S.dirty.length)return;const snap={},paths=new Set();
+  for(const id of S.dirty){const p=pathOf(id),r=recOf(id);if(p&&r){paths.add(p);snap[id]=r.u;}}
+  for(const p of paths)await pushPath(p);
+  S.dirty=S.dirty.filter(id=>{const r=recOf(id);return r&&snap[id]!==undefined&&r.u!==snap[id];});}
+async function pushPath(p){for(let i=0;i<5;i++){const recs=p==='meta.bin'?meta:leads.filter(l=>'data/'+l.m+'.bin'===p);
+  try{S.shas[p]=await put(p,await seal(await K(),recs),S.shas[p]);return;}
+  catch(e){if(e.status!==409&&e.status!==422)throw e;let c=null;try{c=await gh('GET',R()+'/contents/'+p);}catch(x){if(x.status!==404)throw x;}
+    if(c){if(mergeIn(p,await unseal(await K(),await blob(c.sha)))){persist();refresh();}S.shas[p]=c.sha;}else delete S.shas[p];}}
+  throw new Error('Could not save '+p+' (busy), will retry');}
+function refresh(){if(cur&&!cur._new&&sheetOn){const l=byId(cur.id);const ae=document.activeElement;if(l&&!(ae&&ae.closest&&ae.closest('#sheet')&&/INPUT|TEXTAREA/.test(ae.tagName))){if($('#sheet .log'))openLead(l.id);}}else if(!sheetOn)render();}
+
+async function connect(token,repo,pw){
+  const old=Object.assign({},S);
+  try{S.token=token.trim();if(!S.token)throw new Error('Paste your GitHub key');if(!pw)throw new Error('Enter a sync password');
+    const me=await gh('GET','/user').catch(e=>{if(e.status===401)throw new Error('GitHub key not accepted (wrong or expired)');throw e;});
+    let owner=me.login,name=(repo||'pmi-leads-data').trim();if(name.includes('/'))[owner,name]=name.split('/');
+    S.owner=owner;S.repo=name;
+    try{await checkRepo();}catch(e){if(e.status===404)throw new Error('Repo '+owner+'/'+name+' not found, or the key has no access to it');throw e;}
+    let kf=null;try{kf=await gh('GET',R()+'/contents/key.json');}catch(e){if(e.status!==404)throw e;}
+    let raw;
+    if(kf){const k=JSON.parse(TD.decode(unb64(kf.content)));raw=await pbkdf(pw,unb64(k.salt),k.iter);try{await unseal(await aes(raw),unb64(k.check));}catch(e){throw new Error('Wrong sync password');}}
+    else{if(pw.length<8)throw new Error('Sync password: at least 8 characters');const salt=rand(16);raw=await pbkdf(pw,salt);const check=await seal(await aes(raw),{ok:'pmi-leads'});
+      await put('key.json',TE.encode(JSON.stringify({v:1,kdf:'PBKDF2-SHA256',iter:ITER,salt:b64(salt),check:b64(check)},null,1)));}
+    S.key=b64(raw);keyObj=null;S.shas={};S.on=true;S.err='';
+    S.dirty=[...new Set([...S.dirty,...leads.map(l=>l.id),...meta.map(r=>'m:'+r.id)])];saveSync();await sync();if(S.err)throw new Error(S.err);return true;}
+  catch(e){const keep=S.dirty;S=old;S.dirty=keep;keyObj=null;repoOK=false;saveSync();throw e;}}
+function disconnect(){S={shas:{},dirty:[]};keyObj=null;repoOK=false;saveSync();setDot('');}
+
+/* ---------- lock ---------- */
+const lockRec=()=>M('lock');
+const lockOn=()=>{const l=lockRec();return !!(l&&l.on&&l.pw);};
+const normRc=s=>String(s||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
+async function hpw(pw,s){return b64(await pbkdf(pw,unb64(s)));}
+function genRc(){const A='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';const r=rand(16);let s='';for(let i=0;i<16;i++){s+=A[r[i]%32];if(i%4===3&&i<15)s+='-';}return s;}
+async function setLock(pw,rc,after){const s1=b64(rand(16)),s2=b64(rand(16));putMeta({id:'lock',on:true,pw:{s:s1,h:await hpw(pw,s1)},rc:{s:s2,h:await hpw(normRc(rc),s2)},after:+after||0});}
+let locked=document.documentElement.classList.contains('lk'),mustReset=false,hiddenAt=0;
+function lockNow(){if(!lockOn())return;locked=true;document.documentElement.classList.add('lk');if(sheetOn)closeSheet();$('#lockE').textContent='';$('#lockP').value='';setTimeout(()=>$('#lockP').focus(),50);}
+function unlock(){locked=false;document.documentElement.classList.remove('lk');render();if(mustReset){mustReset=false;openSettings();toast('Set a new lock password now',4000);}}
+$('#lockF').addEventListener('submit',async e=>{e.preventDefault();const v=$('#lockP').value;if(!v)return;const L=lockRec();$('#lockE').textContent='Checking…';
+  try{if(L&&await hpw(v,L.pw.s)===L.pw.h)return unlock();
+    if(L&&L.rc&&await hpw(normRc(v),L.rc.s)===L.rc.h){mustReset=true;return unlock();}
+    if(S.token&&v.trim()===S.token){mustReset=true;return unlock();}
+    $('#lockE').textContent='Wrong password';$('#lockP').select();}catch(x){$('#lockE').textContent='Error: '+x.message;}});
+let lockedByMe=false;
+function afterMeta(){if(lockOn()&&!locked&&!mustReset&&!lockedByMe){lockNow();}if(!lockOn()&&locked){unlock();}}
+document.addEventListener('visibilitychange',()=>{if(document.hidden){hiddenAt=Date.now();}else{const L=lockRec();if(lockOn()&&!locked&&hiddenAt&&Date.now()-hiddenAt>=(L.after||0)*1000)lockNow();if(!locked)render();schedule(300);}});
+addEventListener('focus',()=>schedule(300));
+addEventListener('online',()=>schedule(300));
+setInterval(()=>{if(!document.hidden)sync();},30000);
+setInterval(()=>{if(!document.hidden&&!sheetOn&&!locked)render();},60000);
+
+/* ---------- settings ---------- */
+function syncStatus(){if(!S.on)return '<span class="note">Not connected. Data is only on this device.</span>';
+  return 'Connected to <b>'+esc(S.owner+'/'+S.repo)+'</b><br>'+(S.err?'<span class="err">⚠ '+esc(S.err)+'</span>':'<span class="okc">✓ Last sync '+(S.last?new Date(S.last).toLocaleTimeString():'—')+'</span>')+(S.dirty.length?' · '+S.dirty.length+' waiting':'');}
+function openSettings(){const c=cfg(),L=lockRec(),bin=leads.filter(l=>l.del).length;
+  openSheet(head('Settings')+'<div class="sb">'
+  +'<div class="box"><h4>☁️ Sync (phone ↔ PC)</h4><div id="syncSt">'+syncStatus()+'</div>'
+  +(S.on?'<div class="row" style="margin-top:8px"><button class="btn p" data-a="syncnow">Sync now</button><button class="btn d" data-a="disc">Disconnect this device</button></div>'
+   :'<p class="note">Uses your own <b>private</b> GitHub repo. Everything is encrypted on this device before upload. Never type your GitHub password here, only the key.</p><div style="display:grid;gap:6px"><input id="sR" placeholder="Repo name" value="pmi-leads-data"><input id="sT" type="password" placeholder="GitHub key (fine-grained token)" autocomplete="off"><input id="sP" type="password" placeholder="Sync password (same on every device)" autocomplete="new-password"><button class="btn p" data-a="conn">Connect</button><div id="sE" class="err"></div></div>')+'</div>'
+  +'<div class="box"><h4>🔒 App lock</h4>'+(lockOn()?'<p class="note okc">On. Asks for the password on open and after you leave the app.</p><label><div class="lbl">Lock after leaving for</div><select id="lA">'+[[0,'Immediately'],[60,'1 minute'],[300,'5 minutes'],[900,'15 minutes']].map(x=>'<option value="'+x[0]+'"'+(+(L.after||0)===x[0]?' selected':'')+'>'+x[1]+'</option>').join('')+'</select></label>':'<p class="note">Off.</p>')
+   +'<div style="display:grid;gap:6px;margin-top:8px"><input id="lP" type="password" placeholder="'+(lockOn()?'New password':'Password')+'" autocomplete="new-password"><input id="lP2" type="password" placeholder="Repeat password" autocomplete="new-password"><input id="lR" placeholder="Recovery code (leave empty to generate one)" autocomplete="off"><button class="btn p" data-a="setlock">'+(lockOn()?'Change password':'Turn on lock')+'</button>'+(lockOn()?'<button class="btn d" data-a="offlock">Turn off lock</button>':'')+'<div id="lE"></div></div></div>'
+  +'<div class="box"><h4>💾 Backup</h4><div class="row"><button class="btn p" data-a="share">Send backup to…</button><button class="btn" data-a="json">Download JSON</button><button class="btn" data-a="csv">Download CSV</button><button class="btn" data-a="import">Import</button></div><p class="note">Import merges and never deletes. It also accepts old pmi-leads.json files.'+(UI.lastBackup?' Last backup: '+new Date(UI.lastBackup).toLocaleString():'')+'</p></div>'
+  +'<div class="box"><h4>➕ Add many</h4><button class="btn" data-a="paste">Paste a list of leads</button></div>'
+  +'<div class="box"><h4>💬 Message templates</h4><p class="note">Use {greet} {name} {company} {req}.</p><div id="tp">'+tpls().map((t,i)=>'<div style="margin-bottom:8px"><input data-t="'+i+'" data-k="t" value="'+esc(t.t)+'"><textarea data-t="'+i+'" data-k="x" rows="3" style="margin-top:4px">'+esc(t.x)+'</textarea><button class="btn d" data-a="tdel" data-v="'+i+'" style="margin-top:4px">Remove</button></div>').join('')+'</div><button class="btn" data-a="tadd">＋ Add template</button></div>'
+  +'<div class="box"><h4>⚙️ General</h4><div class="g2"><label><div class="lbl">Your company</div><input id="cC" value="'+esc(c.company)+'"></label><label><div class="lbl">Greeting</div><input id="cG" value="'+esc(c.greet)+'"></label></div></div>'
+  +'<div class="box"><h4>🗑 Recycle bin</h4><button class="btn" data-a="bin">Open ('+bin+')</button></div>'
+  +'<p class="note" style="text-align:center">PMI Leads v'+VER+' · '+live().length+' leads</p></div>');
+  const sh=$('#sheet');
+  sh.querySelectorAll('[data-t]').forEach(el=>el.addEventListener('change',()=>{const list=tpls().map(x=>Object.assign({},x));list[+el.dataset.t][el.dataset.k]=el.value;putMeta({id:'tpl',list});toast('Saved ✓',900);}));
+  ['cC','cG'].forEach(id=>{const el=$('#'+id);el.addEventListener('change',()=>{putMeta(Object.assign({},cfg(),{id:'cfg',company:$('#cC').value.trim(),greet:$('#cG').value.trim()||'Hi'}));toast('Saved ✓',900);});});
+  const la=$('#lA');if(la)la.addEventListener('change',()=>{putMeta(Object.assign({},lockRec(),{after:+la.value}));toast('Saved ✓',900);});}
+ACT.syncnow=async()=>{repoOK=false;await sync();toast(S.err?'⚠ '+S.err:'Synced ✓');};
+ACT.disc=()=>{if(!confirm('Disconnect sync on this device? Your data stays on this device and in GitHub.'))return;disconnect();openSettings();};
+ACT.conn=async b=>{const e=$('#sE');e.textContent='Connecting… (takes a few seconds)';b.disabled=true;
+  try{await connect($('#sT').value,$('#sR').value,$('#sP').value);toast('Sync connected ✓');openSettings();render();}
+  catch(x){e.textContent=x.message;b.disabled=false;}};
+ACT.setlock=async b=>{const p=$('#lP').value,p2=$('#lP2').value,e=$('#lE');e.className='err';
+  if(p.length<4)return e.textContent='Password: at least 4 characters';if(p!==p2)return e.textContent='Passwords do not match';
+  let rc=$('#lR').value.trim();if(rc&&normRc(rc).length<8)return e.textContent='Recovery code: at least 8 letters/numbers';const gen=!rc;if(gen)rc=genRc();
+  b.disabled=true;e.className='note';e.textContent='Saving…';const L=lockRec();lockedByMe=true;await setLock(p,rc,L?L.after:60);lockedByMe=false;
+  openSettings();const box=$('#lE');box.className='';box.innerHTML='<p class="okc">✓ Lock is on.</p>'+(gen?'<p class="note">Your recovery code. Write it on paper and keep it safe. Don\'t paste it in any chat:</p><div class="code">'+rc+'</div>':'<p class="note">Your own recovery code is saved.</p>')+'<p class="note">Your GitHub key also works for recovery.</p>';};
+ACT.offlock=()=>{if(!confirm('Turn off the app lock on all devices?'))return;putMeta({id:'lock',on:false});openSettings();};
+ACT.tadd=()=>{const list=tpls().map(x=>Object.assign({},x));list.push({t:'New template',x:'{greet} {name},\n'});putMeta({id:'tpl',list});openSettings();};
+ACT.tdel=(b,v)=>{if(!confirm('Remove this template?'))return;const list=tpls().filter((x,i)=>i!==+v);putMeta({id:'tpl',list});openSettings();};
+function openBin(){const B=leads.filter(l=>l.del).sort((a,b)=>b.u-a.u);
+  openSheet(head('Recycle bin ('+B.length+')')+'<div class="sb">'+(B.length?B.map(l=>'<div class="card"><div class="c"><b>'+flag(l.country)+' '+esc(title(l))+'</b><div class="sm">Deleted '+new Date(l.u).toLocaleDateString()+'</div></div><button class="btn" data-a="restore" data-v="'+l.id+'">Restore</button></div>').join(''):'<div class="empty">Empty.</div>')+'</div>');}
+
+/* ---------- start ---------- */
+if(locked)setTimeout(()=>$('#lockP').focus(),50);else render();
+if(S.on)schedule(200);
+if('serviceWorker' in navigator&&location.protocol!=='file:')addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+</script>
+</body>
+</html>
