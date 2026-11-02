@@ -1,6 +1,7 @@
-# PMI Leads v4.0
+# PMI Leads v3.2
 
-Leads, requirements and follow-ups. A static web app with no server, no build step and no framework.
+The v3 app without photos, material sets and material texts, plus encrypted sync, an app lock and backups.
+A static web app with no server, no build step and no framework.
 
 ## Files
 - `index.html`: the whole app (CSS + JS inline)
@@ -27,9 +28,12 @@ Leads, requirements and follow-ups. A static web app with no server, no build st
 Settings, Backup, Import. Pick your old `pmi-leads.json` or a v3 backup. Import merges and never deletes.
 
 ## Data format (keep backward compatible)
-Each lead: `id`, `u` (updated time in ms), `del:1` when deleted (never hard deleted), `m` (the YYYY-MM bucket, fixed at creation).
-Repo layout: `key.json` (salt + encrypted check), `meta.bin` (settings, templates, lock), `data/YYYY-MM.bin`.
+Leads keep the v3 format (`party`, `contactLog`, `next`, `interests`…) plus `u` (updated time in ms), `del:1` when deleted (never hard deleted) and `m` (the YYYY-MM bucket, fixed at creation). Data saved by v3.1 or v4 on the same site is picked up automatically.
+Repo layout: `key.json` (salt + encrypted check), `meta.bin` (settings, templates, custom materials, lock), `data/YYYY-MM.bin`.
 Merge rule: newer `u` wins per record.
 
 ## Tests
 `node tests/app.test.js [old-pmi-leads.json]`. Playwright with a mocked GitHub API covering two devices, edits, deletes, same-moment saves, offline, wrong password, bad key, public repo and lock.
+
+## Rebuilding from v3.1
+`python3 tools/build_v32.py <v3.1 index.html> pmi-leads/index.html` (uses `tools/sync_v32.js`).
